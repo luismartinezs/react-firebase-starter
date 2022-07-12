@@ -62,6 +62,8 @@ Tasks:
 - [x] Remove all firebase config values from repo, and use firebase secrets instead
 - [x] Recaptcha
 - [ ] Cookie consent + gtag
+- [ ] Able to refresh page when in non root path
+- [ ] Make communication with firestore work with captcha in production
 
 ## First steps to use this project
 
