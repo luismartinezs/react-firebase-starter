@@ -7,6 +7,7 @@ const menuItems = [
   { path: '/account', label: 'Account' },
   { path: '/data-entry', label: 'All entries' },
   { path: '/data-entry/new', label: 'Create entry' },
+  { path: '/admin', label: 'Admin' },
 ];
 
 const NavMenu: FC = (): JSX.Element => {

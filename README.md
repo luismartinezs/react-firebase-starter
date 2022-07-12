@@ -27,6 +27,7 @@ Currently implemented features / tools:
 - [x] Unplugin icons
 - [x] React-query for server state
 - [x] Github actions
+- [x] Recaptcha
 
 Not implemented but recommended:
 
@@ -59,14 +60,15 @@ Tasks:
 - [x] Setup firebase hosting
 - [x] Add generators for pages, features, etc
 - [x] Remove all firebase config values from repo, and use firebase secrets instead
-- [ ] Recaptcha
+- [x] Recaptcha
 - [ ] Cookie consent + gtag
 
-## Steps to use this project
+## First steps to use this project
 
 - Clone this project locally
 - Create new firebase project here: https://console.firebase.google.com/
 - Upgrade firebase project to Blaze plan to be able to use cloud functions and hosting
+- Copy the contents of `.env.local.example` to `.env.local`
 - Create new firebase web app and copy the config values to `.env.local`
 - Push the repo to your own github repo
 - In your github repo, create the secrets necessary for the github actions to run following this: https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository, or via cli: https://cli.github.com/manual/gh_secret_set
@@ -79,9 +81,12 @@ Tasks:
 - Run `firebase init` in the root folder of this project, do not override any files
   - Use the services auth, firestore, functions and hosting, use emulators and accept to download them, and use github actions.
 - Run `firebase deploy --only firestore:rules`
-- Run the app `pnpm dev` and try to login with google. If you go to firestore you should see a user entry
+- Run locally the app and emulate firebase services
+  - Build functions by running `(cd functions && pnpm build)`
+  - Run these two commands in separate shells: `pnpm emu:dev`, `pnpm emu:start`
+- Try to login with google. If you go to your firestore emulator you should see a user entry
 - You should be able to navigate to `http://localhost:3000/account`
-- In firestore, change `isAdmin` for your user to true, then you should be able to access `http://localhost:3000/admin`
+- In the firestore emulator, change `isAdmin` for your user to true, then you should be able to access `http://localhost:3000/admin`
 - Run `firebase deploy --only functions` to deploy cloud functions
 - For user generated content (e.g. todo items), extend dataEntries api starting from `dataEntriesTypes.ts`, or create a new type of entry from scratch using dataEntries as reference
   - Copy or modify files inside the following folders:
@@ -93,7 +98,8 @@ Tasks:
   - Modify `deleteUserDataEntries` in `functions/src/index.ts`
 - Enable firebase app check
   - Follow these instructions [Enable App Check with reCAPTCHA v3 in web apps  |  Firebase Documentation](https://firebase.google.com/docs/app-check/web/recaptcha-provider)
-  - Replace the public recaptcha v3 site key in `src/services/firebase/appCheck.ts` with your key
+  - Add your public recaptcha v3 site key to `.env.local` and to your github secrets
+- Deploy your app by pushing your main branch to the remote repo
 
 If you want to host with another provider such as Netlify, skip everything related to firebase hosting:
 
@@ -112,6 +118,8 @@ To develop locally, it's convenient to emulate the firebase services and avoid i
 - Run the emulators: `pnpm emu:start`
 - Run the app locally in "emulator mode": `pnpm emu:dev`
 
+Note: you should emulate firebase services when running locally. If you try to use the production firebase services from `localhost` with app check enabled, you won't be able to connect. If you really need to do so, follow this [Use App Check with the debug provider in web apps  |  Firebase Documentation](https://firebase.google.com/docs/app-check/web/debug-provider)
+
 ## Deploy to production
 
 - Configure files under `.github/workflows` as needed
@@ -121,7 +129,7 @@ To develop locally, it's convenient to emulate the firebase services and avoid i
 
 ## Import firestore indexes to local file
 
-If / when firestore indexes are generated remotely, you can import them to the local indexes file
+If or when firestore indexes are generated remotely, you can import them to the local indexes file
 
 - `firebase firestore:indexes`
 - Copy output of the command to `firestore.indexes.json` file

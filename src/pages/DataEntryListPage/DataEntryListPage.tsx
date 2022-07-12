@@ -8,27 +8,45 @@ const DataEntryListPage: FC = (): JSX.Element => {
   const { data: dataEntries, isLoading, isError, error } = useDataEntries();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <h1>Data entry list page</h1>
+        <p>Loading...</p>
+      </>
+    );
   }
 
   if (isError) {
-    return <div>Error: {error instanceof Error ? error.message : 'Unable to get data entries'}</div>;
+    return (
+      <>
+        <h1>Data entry list page</h1>
+        <p>Error: {error instanceof Error ? error.message : 'Unable to get data entries'}</p>
+      </>
+    );
   }
 
   if (!dataEntries) {
-    return <div>No data entries available!</div>;
+    return (
+      <>
+        <h1>Data entry list page</h1>
+        <p>No data entries available!</p>
+      </>
+    );
   }
 
   return (
-    <ul>
-      {dataEntries.map((dataEntry) => (
-        <li key={dataEntry.id}>
-          <Link to={`/data-entry/${dataEntry.id}`}>
-            <DataEntryView dataEntry={dataEntry} />
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h1>Data entry list page</h1>
+      <ul>
+        {dataEntries.map((dataEntry) => (
+          <li key={dataEntry.id}>
+            <Link to={`/data-entry/${dataEntry.id}`}>
+              <DataEntryView dataEntry={dataEntry} />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

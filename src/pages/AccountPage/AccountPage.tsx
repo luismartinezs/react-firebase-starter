@@ -30,11 +30,12 @@ const AccountPage = () => {
 
   return (
     <>
+      <h1>Account page</h1>
       <button onClick={() => handleLogout()}>Logout</button>
       <button onClick={() => handleDeleteUser()}>
         {pendingDeleteUser ? 'Deleting account...' : 'Delete my account'}
       </button>
-      {errorDeleteUser && <div>Failed to delete user: {errorDeleteUser.message}</div>}
+      {errorDeleteUser && <p>Failed to delete user: {errorDeleteUser.message}</p>}
     </>
   );
 };

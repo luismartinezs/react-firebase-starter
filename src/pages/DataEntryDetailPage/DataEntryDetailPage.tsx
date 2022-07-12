@@ -20,15 +20,30 @@ const DataEntryDetailPage: FC = (): JSX.Element => {
   const { data: dataEntry, isLoading, isError, error } = useDataEntry(entryUid);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <h1>Data entry detail page</h1>
+        <div>Loading...</div>
+      </>
+    );
   }
 
   if (isError) {
-    return <div>Error: {error instanceof Error ? error.message : 'Unable to get entry'}</div>;
+    return (
+      <>
+        <h1>Data entry detail page</h1>
+        <div>Error: {error instanceof Error ? error.message : 'Unable to get entry'}</div>
+      </>
+    );
   }
 
   if (!dataEntry) {
-    return <div>Entry not available!</div>;
+    return (
+      <>
+        <h1>Data entry detail page</h1>
+        <div>Entry not available!</div>
+      </>
+    );
   }
 
   const handleDeleteDataEntry = async () => {
@@ -53,12 +68,12 @@ const DataEntryDetailPage: FC = (): JSX.Element => {
   };
 
   return (
-    <div>
-      <span>DataEntryDetailPage</span>
+    <>
+      <h1>Data entry detail page</h1>
       <DataEntryView dataEntry={dataEntry} />
       <button onClick={handleDeleteDataEntry}>Delete entry</button>
       <button onClick={handleEditDataEntry}>Update entry timestamp</button>
-    </div>
+    </>
   );
 };
 

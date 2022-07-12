@@ -10,10 +10,20 @@ const LoginPage = () => {
   const [authUser] = useAuthState(auth);
 
   if (authUser) {
-    return <div>You&apos;re already logged in</div>;
+    return (
+      <>
+        <h1>Login page</h1>
+        <p>You&apos;re already logged in</p>
+      </>
+    );
   }
 
-  return <button onClick={() => signinWithGoogle(() => navigate('/'))}>Login with Google</button>;
+  return (
+    <>
+      <h1>Login page</h1>
+      <button onClick={() => signinWithGoogle(() => navigate('/'))}>Login with Google</button>
+    </>
+  );
 };
 
 export default LoginPage;

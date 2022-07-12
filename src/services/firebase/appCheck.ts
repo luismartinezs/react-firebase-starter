@@ -3,7 +3,8 @@ import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 import app from './app';
 
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LcmGuQgAAAAAENap6HBdB8NvcYvIpBEZ_GAePHj'),
+  // replace the public key below with your own public key
+  provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_V3_PUBLIC_KEY),
   isTokenAutoRefreshEnabled: true,
 });
 

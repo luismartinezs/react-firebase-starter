@@ -13,9 +13,10 @@ const NewDataEntryPage: FC = (): JSX.Element => {
     navigate('/data-entry');
   };
   return (
-    <div>
+    <>
+      <h1>New data entry page</h1>
       <button onClick={handleCreateDataEntry}>Create new data entry</button>
-    </div>
+    </>
   );
 };
 

@@ -30,7 +30,7 @@ export const lazyRoutes: IRoute[] = [
   // example of private route only accessible to admins
   {
     path: '/admin',
-    element: () => <div>Admin</div>,
+    element: () => <h1>Admin page</h1>,
     requireAuth: { asAdmin: true },
   },
   { path: '*', element: NotFoundPage },
