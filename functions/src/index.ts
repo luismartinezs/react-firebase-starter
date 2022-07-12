@@ -7,6 +7,14 @@ const USERS = "users";
 const ENTRIES = "dataEntries";
 
 export const deleteUser = functions.https.onCall((data, context) => {
+  // App Check token verification
+  if (context.app == undefined) {
+    throw new functions.https.HttpsError(
+      "failed-precondition",
+      "The function must be called from an App Check verified app."
+    );
+  }
+
   if (!context.auth) {
     throw new functions.https.HttpsError(
       "failed-precondition",

@@ -40,6 +40,7 @@ Not implemented but recommended:
 - [ ] yum for schema validation
 - [ ] Storybook
 - [ ] Commitlint
+- [ ] Cookie consent + gtag
 
 Tasks:
 
@@ -59,7 +60,7 @@ Tasks:
 - [x] Add generators for pages, features, etc
 - [x] Remove all firebase config values from repo, and use firebase secrets instead
 - [ ] Recaptcha
-- [ ] gtag
+- [ ] Cookie consent + gtag
 
 ## Steps to use this project
 
@@ -90,6 +91,9 @@ Tasks:
     - `src/Router`
   - Modify `firestore.rules`
   - Modify `deleteUserDataEntries` in `functions/src/index.ts`
+- Enable firebase app check
+  - Follow these instructions [Enable App Check with reCAPTCHA v3 in web apps  |  Firebase Documentation](https://firebase.google.com/docs/app-check/web/recaptcha-provider)
+  - Replace the public recaptcha v3 site key in `src/services/firebase/appCheck.ts` with your key
 
 If you want to host with another provider such as Netlify, skip everything related to firebase hosting:
 

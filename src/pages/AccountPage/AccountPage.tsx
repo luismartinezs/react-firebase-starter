@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import invariant from 'tiny-invariant';
 
-import { useUserData, type IUserData } from '@/features/userData';
+import { useUserData } from '@/features/userData';
 import { useAuth } from '@/features/userAuth';
 import queryClient from '@/app/queryClient';
 
