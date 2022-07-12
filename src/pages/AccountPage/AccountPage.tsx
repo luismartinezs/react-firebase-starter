@@ -6,7 +6,7 @@ import { useUserData } from '@/features/userData';
 import { useAuth } from '@/features/userAuth';
 import queryClient from '@/app/queryClient';
 
-const AccountPage = () => {
+const AccountPage: FC = (): JSX.Element => {
   const { userData } = useUserData();
 
   // this is a way to let typescript know that userData is not null. If userData is null, it will throw an error. It's an unorthodox way to say "if we don't have user data here, something went very wrong and the code might be broken"

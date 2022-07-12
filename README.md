@@ -170,4 +170,4 @@ References:
 
 - Recaptcha token is missing from client
   - [x] Make sure recaptcha key is correct in github secrets
-  - [ ] Use key directly instead of environment variable
+  - [x] Use key directly instead of environment variable
