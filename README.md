@@ -100,7 +100,7 @@ If you want to host with another provider such as Netlify, skip everything relat
 
 - Run `pnpm plop` to scaffold components or pages
 
-## Emulate firestore
+## Emulate firebase services
 
 To develop locally, it's convenient to emulate the firebase services and avoid interacting with the production services.
 
@@ -117,15 +117,19 @@ To develop locally, it's convenient to emulate the firebase services and avoid i
 
 ## Import firestore indexes to local file
 
+If / when firestore indexes are generated remotely, you can import them to the local indexes file
+
 - `firebase firestore:indexes`
 - Copy output of the command to `firestore.indexes.json` file
+
+Read more: [Manage indexes in Cloud Firestore  |  Firebase Documentation](https://firebase.google.com/docs/firestore/query-data/indexing)
 
 ## Debug cloud functions
 
 References:
 
-- https://firebase.google.com/docs/functions/local-shell#invoke_https_callable_functions
-- https://medium.com/firebase-developers/debugging-firebase-functions-in-vs-code-a1caf22db0b2
+- [Test functions interactively  |  Firebase Documentation](https://firebase.google.com/docs/functions/local-shell#invoke_https_callable_functions)
+- [Debugging Firebase Functions in VS Code | by Jorge Menjivar | Firebase Developers | Medium](https://medium.com/firebase-developers/debugging-firebase-functions-in-vs-code-a1caf22db0b2)
 
 ### Initial setup (only the first time)
 

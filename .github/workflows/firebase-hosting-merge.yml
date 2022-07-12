@@ -28,4 +28,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLAYGROUND_PROJECT_5D0B5 }}'
           channelId: live
-          projectId: playground-project-5d0b5
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
