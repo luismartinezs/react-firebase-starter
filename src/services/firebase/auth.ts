@@ -1,10 +1,10 @@
 import { getAuth, connectAuthEmulator, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
-import firebaseApp from '@/services/firebase/app';
+import app from './app';
 import { createUserData, getUserDataByUid } from '@/features/userData/userDataApi';
-import { deleteUser } from '@/services/firebase/functions';
+import { deleteUser } from './functions';
 
-const auth = getAuth(firebaseApp);
+const auth = getAuth(app);
 import.meta.env.VITE_FIREBASE_EMULATOR && connectAuthEmulator(auth, 'http://localhost:9099');
 
 const googleProvider = new GoogleAuthProvider();

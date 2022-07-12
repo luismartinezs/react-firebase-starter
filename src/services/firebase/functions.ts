@@ -1,8 +1,8 @@
 import { getFunctions, httpsCallable, connectFunctionsEmulator } from 'firebase/functions';
 
-import firebaseApp from '@/services/firebase/app';
+import app from './app';
 
-const functions = getFunctions(firebaseApp);
+const functions = getFunctions(app);
 import.meta.env.VITE_FIREBASE_EMULATOR && connectFunctionsEmulator(functions, 'localhost', 5001);
 
 // NOTE I'm not using this export, but leaving it here as an example of how to call cloud functions from the frontend

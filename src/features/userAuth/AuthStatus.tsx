@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '@/features/userAuth/authHooks';
+import { useAuth } from './authHooks';
 
 function AuthStatus() {
   const { userData, logout } = useAuth();
