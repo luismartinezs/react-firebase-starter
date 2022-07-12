@@ -5,7 +5,7 @@ import app from './app';
 const appCheck = import.meta.env.PROD
   ? initializeAppCheck(app, {
       // replace the public key below with your own public key
-      provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_V3_PUBLIC_KEY),
+      provider: new ReCaptchaV3Provider('6LcmGuQgAAAAAENap6HBdB8NvcYvIpBEZ_GAePHj'),
       isTokenAutoRefreshEnabled: true,
     })
   : null;

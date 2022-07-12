@@ -165,3 +165,9 @@ References:
 
 - Run `pnpm test` to run all tests
 - `src/util/test.tsx` re-exports all react testing library utilities as well as a version of the render method decorated with mock providers. See a usage example in `src/components/SuspenseWrapper/SuspenseWrapper.test.tsx`
+
+## Issues
+
+- Recaptcha token is missing from client
+  - [x] Make sure recaptcha key is correct in github secrets
+  - [ ] Use key directly instead of environment variable
