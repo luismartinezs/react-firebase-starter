@@ -131,17 +131,19 @@ const editDataEntry = (id: string, data: IDataEntry) => {
 };
 
 const resolveDataEntryUserUid = (entry: IDataEntry) => {
-  if (useAuth().currentUser === null) {
+  const auth = useAuth();
+
+  if (auth.currentUser === null) {
     throw new Error('resolveDataEntryUid: User is not logged in');
   }
 
   if (typeof entry.userUid === 'undefined' || entry.userUid === null) {
-    return { ...entry, userUid: useAuth().currentUser.uid };
+    return { ...entry, userUid: auth.currentUser.uid };
   }
 
   // as a safety measure, entries are only created by the user that owns them
   // this may need change if, for example, admin need to be able to create entries for any user
-  if (entry.userUid !== useAuth().currentUser.uid) {
+  if (entry.userUid !== auth.currentUser.uid) {
     throw new Error('resolveDataEntryUid: Provided userUid does not match current user');
   }
 
