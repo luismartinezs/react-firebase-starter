@@ -174,7 +174,6 @@ References:
   - [x] Make sure recaptcha key is correct in github secrets
   - [x] Use key directly instead of environment variable
 
-
 ## References
 
 ### Firebase
