@@ -1,6 +1,31 @@
-import { useContext } from 'react';
-import AuthContext from './authContext';
+import { signOut } from 'firebase/auth';
+import { useHttpsCallable } from 'react-firebase-hooks/functions';
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+import queryClient from '@/app/queryClient';
+import { useFunctions, useAuth } from '@/services/firebase';
+
+export const useDeleteUser = () => {
+  const [_deleteUser, pendingDeleteUser, errorDeleteUser] = useHttpsCallable(useFunctions(), 'deleteUser');
+  const { logout } = useLogout();
+
+  const deleteUser = async () => {
+    await _deleteUser();
+    logout();
+  };
+
+  return {
+    deleteUser,
+    pendingDeleteUser,
+    errorDeleteUser,
+  };
+};
+
+export const useLogout = () => {
+  const logout = async () => {
+    await signOut(useAuth());
+    queryClient.removeQueries();
+  };
+  return {
+    logout,
+  };
+};

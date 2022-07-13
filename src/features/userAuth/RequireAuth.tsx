@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { useAuth } from './authHooks';
+import { useUserData } from '@/features/userData';
 
 export interface IRequireAuthProps {
   children: JSX.Element;
@@ -8,7 +8,7 @@ export interface IRequireAuthProps {
 }
 
 function RequireAuth({ children, asAdmin = false }: IRequireAuthProps): JSX.Element {
-  const { userData, isLoading, isError, error } = useAuth();
+  const { userData, isLoading, isError, error } = useUserData();
   const location = useLocation();
   const pathname = '/404'; // should be a path that doesn't require admin
 

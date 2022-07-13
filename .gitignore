@@ -28,6 +28,7 @@ coverage
 
 # Firebase
 emu-data/*
+firebase-export-*/*
 
 # Firebase admin key
 admin-key-*.json

@@ -1,8 +1,6 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-// eslint-disable-next-line import/no-unresolved
-import Icons from 'unplugin-icons/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { alias } from './alias';
 
@@ -31,7 +29,6 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    Icons({ compiler: 'jsx', jsx: 'react' }),
     visualizer({
       filename: './rollup-bundle-size-stats.html',
     }),

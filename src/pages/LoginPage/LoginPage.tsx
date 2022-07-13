@@ -1,13 +1,20 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
-import { useAuth } from '@/features/userAuth/authHooks';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/services/firebase/auth';
+import { useAuth } from '@/services/firebase';
+import { userDataAPI } from '@/features/userData';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { signinWithGoogle } = useAuth();
-  const [authUser] = useAuthState(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(useAuth());
+  const [authUser] = useAuthState(useAuth(), {
+    onUserChanged: async (user) => {
+      if (user) {
+        await userDataAPI.initUserData(user);
+        navigate('/');
+      }
+    },
+  });
 
   if (authUser) {
     return (
@@ -21,7 +28,7 @@ const LoginPage = () => {
   return (
     <>
       <h1>Login page</h1>
-      <button onClick={() => signinWithGoogle(() => navigate('/'))}>Login with Google</button>
+      <button onClick={() => signInWithGoogle()}>Login with Google</button>
     </>
   );
 };

@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import Layout from '@/components/Layout';
-import AuthProvider from '@/features/userAuth/AuthProvider';
-import RequireAuth from '@/features/userAuth/RequireAuth';
+import { RequireAuth } from '@/features/userAuth';
 import type { IRoute } from './routerTypes';
 import DynamicErrorView from '@/components/DynamicErrorView';
 import SuspenseWrapper from '@/components/SuspenseWrapper';
@@ -44,37 +43,33 @@ export const withErrorBoundary = (Component: IRoute['element']) => (
 
 const Router: React.FC = () => {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route element={<Layout />}>
-            {lazyRoutes.map(({ requireAuth, element: Element, ...routeProps }) => {
-              if (requireAuth) {
-                return (
-                  <Route
-                    key={routeProps.path}
-                    {...routeProps}
-                    element={
-                      <RequireAuth {...requireAuth}>
-                        <SuspenseWrapper>{withErrorBoundary(Element)}</SuspenseWrapper>
-                      </RequireAuth>
-                    }
-                  />
-                );
-              }
+    <Routes>
+      <Route element={<Layout />}>
+        {lazyRoutes.map(({ requireAuth, element: Element, ...routeProps }) => {
+          if (requireAuth) {
+            return (
+              <Route
+                key={routeProps.path}
+                {...routeProps}
+                element={
+                  <RequireAuth {...requireAuth}>
+                    <SuspenseWrapper>{withErrorBoundary(Element)}</SuspenseWrapper>
+                  </RequireAuth>
+                }
+              />
+            );
+          }
 
-              return (
-                <Route
-                  key={routeProps.path}
-                  {...routeProps}
-                  element={<SuspenseWrapper>{withErrorBoundary(Element)}</SuspenseWrapper>}
-                />
-              );
-            })}
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+          return (
+            <Route
+              key={routeProps.path}
+              {...routeProps}
+              element={<SuspenseWrapper>{withErrorBoundary(Element)}</SuspenseWrapper>}
+            />
+          );
+        })}
+      </Route>
+    </Routes>
   );
 };
 

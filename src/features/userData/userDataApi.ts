@@ -1,10 +1,9 @@
 import { collection, query, where, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import type { Query, DocumentData, DocumentReference } from 'firebase/firestore';
-import type { User } from 'firebase/auth';
+import type { User, UserCredential } from 'firebase/auth';
 import pRetry from 'p-retry';
 
-import { auth } from '@/services/firebase/auth';
-import db from '@/services/firebase/firestore';
+import { useAuth, useFirestore } from '@/services/firebase';
 import type { IUserData } from './userDataTypes';
 
 const USERS = 'users';
@@ -13,15 +12,16 @@ interface IGetUserDataRefByUid<T> {
   (uid?: string): DocumentReference<T> | null;
 }
 
+// single user
 export const getUserDataRefByUid: IGetUserDataRefByUid<IUserData> = (uid) => {
   if (!uid) {
     return null;
   }
-  return doc(db, USERS, uid) as DocumentReference<IUserData>;
+  return doc(useFirestore(), USERS, uid) as DocumentReference<IUserData>;
 };
 
 export const getUserData = async (uid: string): Promise<IUserData | null> => {
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     return null;
   }
 
@@ -41,10 +41,11 @@ export const getUserData = async (uid: string): Promise<IUserData | null> => {
   return null;
 };
 
+// query multiple users
 export const getUserDataByUid = async (uid: string): Promise<IUserData | null> => {
   const userData = await getUserDataByKey('uid', uid);
 
-  // uids are unique
+  // uids are unique so this shouldn't be an array, but handling this case just in case
   if (Array.isArray(userData)) {
     return userData[0];
   }
@@ -53,14 +54,14 @@ export const getUserDataByUid = async (uid: string): Promise<IUserData | null> =
 };
 
 export const getQueryByKey = <K extends keyof IUserData>(key: K, value: IUserData[K]): Query<DocumentData> => {
-  return query(collection(db, USERS), where(key, '==', value));
+  return query(collection(useFirestore(), USERS), where(key, '==', value));
 };
 
 const getUserDataByKey = async <K extends keyof IUserData>(
   key: K,
   value: IUserData[K]
 ): Promise<IUserData | IUserData[] | null> => {
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     return null;
   }
 
@@ -90,13 +91,29 @@ export const createUserData = (
     isAdmin,
   };
 
-  return setDoc(doc(db, USERS, user.uid), userPayload);
+  return setDoc(doc(useFirestore(), USERS, user.uid), userPayload);
+};
+
+// creates user data if it doesn't exist
+export const initUserData = async (user: User | null) => {
+  if (user === null) {
+    return;
+  }
+
+  const userData = await getUserDataByUid(user.uid);
+
+  if (userData) {
+    return;
+  }
+
+  createUserData(user);
 };
 
 const userDataAPI = {
   getUserData,
   createUserData,
   getUserDataByUid,
+  initUserData,
 };
 
 export default userDataAPI;

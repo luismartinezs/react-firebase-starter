@@ -2,13 +2,13 @@ import { useQuery, useMutation } from 'react-query';
 
 import dataEntriesAPI from './dataEntriesApi';
 import queryClient from '@/app/queryClient';
-import { auth } from '@/services/firebase/auth';
+import { useAuth } from '@/services/firebase';
 import type { IDataEntry } from './dataEntriesTypes';
 import type { IUserData } from '@/features/userData';
 import queryKeys from '@/app/queryKeys';
 
 export function useDataEntries() {
-  const userData: IUserData | undefined = queryClient.getQueryData([queryKeys.userDataKey, auth.currentUser?.uid]);
+  const userData: IUserData | undefined = queryClient.getQueryData([queryKeys.userDataKey, useAuth().currentUser?.uid]);
 
   return useQuery(
     [queryKeys.dataEntriesKey, userData?.uid],
@@ -23,7 +23,7 @@ export function useDataEntries() {
 }
 
 export function useDataEntry(id: string) {
-  const userData: IUserData | undefined = queryClient.getQueryData([queryKeys.userDataKey, auth.currentUser?.uid]);
+  const userData: IUserData | undefined = queryClient.getQueryData([queryKeys.userDataKey, useAuth().currentUser?.uid]);
 
   return useQuery(['entry', id], () => dataEntriesAPI.getDataEntry(id), {
     enabled: !!userData,

@@ -24,7 +24,6 @@ Currently implemented features / tools:
 - [x] Linting
 - [x] Prettier code formatting
 - [x] React testing library
-- [x] Unplugin icons
 - [x] React-query for server state
 - [x] Github actions
 - [x] Recaptcha
@@ -43,6 +42,7 @@ Not implemented but recommended:
 - [ ] Commitlint
 - [ ] Cookie consent + gtag
 - [ ] Sentry
+- [ ] Unplugin icons
 
 Tasks:
 
@@ -171,3 +171,11 @@ References:
 - Recaptcha token is missing from client
   - [x] Make sure recaptcha key is correct in github secrets
   - [x] Use key directly instead of environment variable
+
+
+## References
+
+### Firebase
+
+- Modular setup for firebase app: https://sourcegraph.com/github.com/firebase/firebase-js-sdk/-/blob/e2e/sample-apps/modular.js
+- A similar template: https://github.com/TeXmeijin/vite-react-ts-tailwind-firebase-starter

@@ -4,8 +4,6 @@ import { render, RenderOptions } from '@testing-library/react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { MemoryRouter, type MemoryRouterProps } from 'react-router-dom';
 
-import AuthContext, { type IAuthContext } from '@/features/userAuth/authContext';
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -21,24 +19,6 @@ setLogger({
   error: () => {},
 });
 
-export const defaultAuthContextValue: IAuthContext = {
-  userData: {
-    authProvider: 'google',
-    email: 'lando.calrissian@example.com',
-    isAdmin: false,
-    name: 'Lando Calrissian',
-    uid: '2fc5t2c3t354',
-  },
-  signinWithGoogle: async () => {},
-  logout: async () => {},
-  isLoading: false,
-  isError: false,
-  error: null,
-  deleteUser: () => {},
-  pendingDeleteUser: false,
-  errorDeleteUser: false,
-};
-
 export const defaultRouterProps: MemoryRouterProps = {
   initialEntries: ['/'],
   initialIndex: 0,
@@ -46,36 +26,25 @@ export const defaultRouterProps: MemoryRouterProps = {
 
 const AllTheProviders: FC<{
   children: ReactNode;
-  authContextValue?: IAuthContext;
   routerProps?: MemoryRouterProps;
-}> = ({ children, authContextValue = defaultAuthContextValue, routerProps = defaultRouterProps }) => {
+}> = ({ children, routerProps = defaultRouterProps }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter {...routerProps}>
-        <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>
-      </MemoryRouter>
+      <MemoryRouter {...routerProps}>{children}</MemoryRouter>
     </QueryClientProvider>
   );
 };
 
 export const AllTheProvidersDefault: FC<{ children?: ReactNode }> = ({ children }) => {
-  return (
-    <AllTheProviders authContextValue={defaultAuthContextValue} routerProps={defaultRouterProps}>
-      {children}
-    </AllTheProviders>
-  );
+  return <AllTheProviders routerProps={defaultRouterProps}>{children}</AllTheProviders>;
 };
 
 interface IProviderProps {
-  authContextValue?: IAuthContext;
   routerProps?: MemoryRouterProps;
 }
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'> & IProviderProps) => {
   const wrapperProps: IProviderProps = {};
-  if (options?.authContextValue) {
-    wrapperProps.authContextValue = options.authContextValue;
-  }
   if (options?.routerProps) {
     wrapperProps.routerProps = options.routerProps;
   }

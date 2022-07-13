@@ -5,7 +5,6 @@ import {
   useCreateDataEntry,
   useEditDataEntry,
 } from './dataEntriesHooks';
-import dataEntriesApi from './dataEntriesApi';
 import type { IDataEntry } from './dataEntriesTypes';
 import { getEntriesByFilter, getTodayEntries } from './dataEntriesUtils';
 
@@ -15,7 +14,6 @@ export {
   useDeleteDataEntry,
   useCreateDataEntry,
   useEditDataEntry,
-  dataEntriesApi,
   type IDataEntry,
   getEntriesByFilter,
   getTodayEntries,

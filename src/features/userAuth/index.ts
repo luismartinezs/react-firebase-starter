@@ -1,3 +1,4 @@
-import { useAuth } from './authHooks';
+import { useDeleteUser, useLogout } from './authHooks';
+import RequireAuth, { type IRequireAuthProps } from './RequireAuth';
 
-export { useAuth };
+export { useDeleteUser, useLogout, RequireAuth, type IRequireAuthProps };

@@ -24,8 +24,7 @@ import type {
   DocumentReference,
 } from 'firebase/firestore';
 
-import { db } from '@/services/firebase/index';
-import { auth } from '@/services/firebase/auth';
+import { useFirestore, useAuth } from '@/services/firebase';
 import type { IDataEntry } from './dataEntriesTypes';
 
 const DATA_ENTRIES = 'dataEntries';
@@ -55,10 +54,10 @@ interface IGetDataEntries {
 const getQuery = ({ isAdmin = false }: IGetDataEntriesOptions): Query<IDataEntry> => {
   type QueryTuple = [CollectionReference<DocumentData>, ...QueryConstraint[]];
 
-  let queryElements: QueryTuple = [collection(db, DATA_ENTRIES).withConverter(dataEntryConverter)];
+  let queryElements: QueryTuple = [collection(useFirestore(), DATA_ENTRIES).withConverter(dataEntryConverter)];
 
   if (!isAdmin) {
-    queryElements.push(where('userUid', '==', auth.currentUser?.uid));
+    queryElements.push(where('userUid', '==', useAuth().currentUser?.uid));
   }
 
   queryElements.push(orderBy('timestamp', 'desc'));
@@ -74,7 +73,7 @@ const getDataEntriesFromSnapshot = (snapshot: QuerySnapshot<DocumentData>): Arra
 };
 
 const getDataEntries: IGetDataEntries = async ({ isAdmin = false }) => {
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     throw new Error('getDataEntries: User is not logged in');
   }
 
@@ -93,11 +92,11 @@ const getDataEntryRefById: IGetEntryRefById<IDataEntry> = (id) => {
   if (!id) {
     return null;
   }
-  return doc(db, DATA_ENTRIES, id).withConverter(dataEntryConverter) as DocumentReference<IDataEntry>;
+  return doc(useFirestore(), DATA_ENTRIES, id).withConverter(dataEntryConverter) as DocumentReference<IDataEntry>;
 };
 
 const getDataEntry = async (id: string): Promise<IDataEntry | null> => {
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     throw new Error('getDataEntry: User is not logged in');
   }
 
@@ -118,7 +117,7 @@ const getDataEntry = async (id: string): Promise<IDataEntry | null> => {
 };
 
 const editDataEntry = (id: string, data: IDataEntry) => {
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     throw new Error('editDataEntry: User is not logged in');
   }
 
@@ -132,17 +131,17 @@ const editDataEntry = (id: string, data: IDataEntry) => {
 };
 
 const resolveDataEntryUserUid = (entry: IDataEntry) => {
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     throw new Error('resolveDataEntryUid: User is not logged in');
   }
 
   if (typeof entry.userUid === 'undefined' || entry.userUid === null) {
-    return { ...entry, userUid: auth.currentUser.uid };
+    return { ...entry, userUid: useAuth().currentUser.uid };
   }
 
   // as a safety measure, entries are only created by the user that owns them
   // this may need change if, for example, admin need to be able to create entries for any user
-  if (entry.userUid !== auth.currentUser.uid) {
+  if (entry.userUid !== useAuth().currentUser.uid) {
     throw new Error('resolveDataEntryUid: Provided userUid does not match current user');
   }
 
@@ -152,18 +151,18 @@ const resolveDataEntryUserUid = (entry: IDataEntry) => {
 const createDataEntry = async () => {
   const dataEntry = {};
 
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     throw new Error('createDataEntry: User is not logged in');
   }
 
-  return addDoc(collection(db, DATA_ENTRIES).withConverter(dataEntryConverter), {
+  return addDoc(collection(useFirestore(), DATA_ENTRIES).withConverter(dataEntryConverter), {
     ...resolveDataEntryUserUid(dataEntry),
     timestamp: serverTimestamp(),
   });
 };
 
 const deleteDataEntry = (id: string) => {
-  if (auth.currentUser === null) {
+  if (useAuth().currentUser === null) {
     throw new Error('deleteDataEntry: User is not logged in');
   }
 
