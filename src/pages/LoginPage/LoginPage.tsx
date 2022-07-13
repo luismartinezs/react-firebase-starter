@@ -11,7 +11,6 @@ const LoginPage = () => {
     onUserChanged: async (user) => {
       if (user) {
         await userDataAPI.initUserData(user);
-        navigate('/');
       }
     },
   });

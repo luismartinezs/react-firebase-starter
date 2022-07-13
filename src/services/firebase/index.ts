@@ -25,7 +25,6 @@ const initFirebaseApp = () => {
   try {
     app = initializeApp(config);
 
-    // config app check
     if (import.meta.env.PROD) {
       initializeAppCheck(app, {
         // replace the public key below with your own public key

@@ -1,8 +1,3 @@
-/**
- * If you want to redirect user to login page if they're not logged in, uncomment the commented lines
- */
-
-// import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -11,12 +6,10 @@ import userDataAPI from './userDataApi';
 import queryKeys from '@/app/queryKeys';
 
 export function useUserData() {
-  // const navigate = useNavigate();
   const [authUser, isAuthLoading, authError] = useAuthState(useAuth(), {
     onUserChanged: async (user) => {
       if (!user) {
         console.log('Not logged in');
-        // navigate('/login')
         return;
       }
     },

@@ -6,9 +6,10 @@ admin.initializeApp();
 const USERS = "users";
 const ENTRIES = "dataEntries";
 
+const isProd = process.env.NODE_ENV === "production";
+
 export const deleteUser = functions.https.onCall((data, context) => {
-  // App Check token verification
-  if (context.app == undefined) {
+  if (isProd && context.app == undefined) {
     throw new functions.https.HttpsError(
       "failed-precondition",
       "The function must be called from an App Check verified app."

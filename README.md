@@ -84,6 +84,8 @@ Tasks:
 - Run `firebase init` in the root folder of this project, do not override any files
   - Use the services auth, firestore, functions and hosting, use emulators and accept to download them, and use github actions.
 - Run `firebase deploy --only firestore:rules`
+- Run this command in the console: `(cd functions && echo NODE_ENV=production > .env && echo NODE_ENV=development > .env.local)`
+- Add an `.env` file and an `.env.local` to `functions/` with a `NODE_ENV` variable set to `product
 - Run locally the app and emulate firebase services
   - Build functions by running `(cd functions && pnpm build)`
   - Run these two commands in separate shells: `pnpm emu:dev`, `pnpm emu:start`
@@ -117,7 +119,7 @@ If you want to host with another provider such as Netlify, skip everything relat
 
 To develop locally, it's convenient to emulate the firebase services and avoid interacting with the production services.
 
-- If you changed cloud functions, rebuild them before running the emulator: `(cd functions && pnpm build)`
+- If you changed cloud functions, rebuild them before running the emulator: `(cd functions && pnpm build)`, or run then in watch mode: `(cd functions && pnpm build:watch)`
 - Run the emulators: `pnpm emu:start`
 - Run the app locally in "emulator mode": `pnpm emu:dev`
 
@@ -128,7 +130,7 @@ Note: you should emulate firebase services when running locally. If you try to u
 - Configure files under `.github/workflows` as needed
 - Try to run locally with `pnpm build` and fix any issues
 - Push `main` branch (auto deployed via github action)
-- If functions changed, run `firebase deploy --only functions`
+- If functions changed, run `firebase deploy --only functions` (remember to build them with `(cd functions && pnpm build)`)
 
 ## Import firestore indexes to local file
 
@@ -155,7 +157,7 @@ References:
 ### Debugging
 
 - `(cd functions && pnpm build:watch)`
-- `(export GOOGLE_APPLICATION_CREDENTIALS=~/admin-key-credentials.json && cd function && firebase emulators:start --inspect-functions)` (`admin-key-credentials.json` is the file you got during the setup)
+- `(export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/admin-key-credentials.json && cd function && firebase emulators:start --inspect-functions)` (`admin-key-credentials.json` is the file you got during the setup)
 - Comment references to `context.auth`, because that is not available locally (and restore it after testing!)
 - Start debug mode
 - Set breakpoints
