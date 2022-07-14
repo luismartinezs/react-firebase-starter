@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { MantineProvider } from '@mantine/core';
 import { BrowserRouter } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClientProvider } from 'react-query';
@@ -8,6 +7,7 @@ import { QueryClientProvider } from 'react-query';
 import Router from '@/Router';
 import queryClient from '@/app/queryClient';
 import FirebaseApp from '@/components/FirebaseApp';
+import ThemeProvider from '@/components/ThemeProvider';
 
 function App() {
   return (
@@ -15,13 +15,9 @@ function App() {
       <FirebaseApp>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <MantineProvider
-              theme={{
-                colorScheme: 'dark',
-              }}
-            >
+            <ThemeProvider>
               <Router />
-            </MantineProvider>
+            </ThemeProvider>
             <ReactQueryDevtools initialIsOpen={false} />
           </BrowserRouter>
         </QueryClientProvider>

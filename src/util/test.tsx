@@ -3,6 +3,7 @@ import type { FC, ReactElement, ReactNode } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { MemoryRouter, type MemoryRouterProps } from 'react-router-dom';
+import ThemeProvider from '@/components/ThemeProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,7 +31,9 @@ const AllTheProviders: FC<{
 }> = ({ children, routerProps = defaultRouterProps }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter {...routerProps}>{children}</MemoryRouter>
+      <MemoryRouter {...routerProps}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </MemoryRouter>
     </QueryClientProvider>
   );
 };
