@@ -16,6 +16,7 @@ const LoginPage = React.lazy(() => import('@/pages/LoginPage'));
 const DataEntryDetailPage = React.lazy(() => import('@/pages/DataEntryDetailPage'));
 const NewDataEntryPage = React.lazy(() => import('@/pages/NewDataEntryPage'));
 const DataEntryListPage = React.lazy(() => import('@/pages/DataEntryListPage'));
+const AdminPage = React.lazy(() => import('@/pages/AdminPage'));
 
 export const lazyRoutes: IRoute[] = [
   // example of public route
@@ -29,7 +30,7 @@ export const lazyRoutes: IRoute[] = [
   // example of private route only accessible to admins
   {
     path: '/admin',
-    element: () => <h1>Admin page</h1>,
+    element: AdminPage,
     requireAuth: { asAdmin: true },
   },
   { path: '*', element: NotFoundPage },

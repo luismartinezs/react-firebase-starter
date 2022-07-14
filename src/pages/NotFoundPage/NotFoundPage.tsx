@@ -1,11 +1,14 @@
+import { Title, Text } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (
     <>
-      <h1>Not found page</h1>
-      <p>We didn&apos;t find the content you are requesting 😔</p>
-      <Link to="/">Take me to the home page</Link>
+      <Title order={1}>Not found page</Title>
+      <p className="prose-invert">We didn&apos;t find the content you are requesting 😔</p>
+      <Text component={Link} variant="link" to="/">
+        Take me to the home page
+      </Text>
     </>
   );
 };
