@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { Title } from '@mantine/core';
+
 const HomePage = () => {
   return (
     <>
-      <h1>HomePage</h1>
-      <p>This is a public page that anybody can access</p>
+      <Title order={1}>HomePage</Title>
+      <p className="prose-invert">This is a public page that anybody can access</p>
     </>
   );
 };

@@ -5,6 +5,7 @@ specifiers:
   '@mantine/hooks': ^4.2.12
   '@mantine/modals': ^4.2.12
   '@mantine/notifications': ^4.2.12
+  '@tailwindcss/typography': ^0.5.4
   '@testing-library/jest-dom': ^5.16.4
   '@testing-library/react': ^13.3.0
   '@types/react': ^18.0.0
@@ -59,6 +60,7 @@ dependencies:
   web-vitals: 2.1.4
 
 devDependencies:
+  '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.6
   '@testing-library/jest-dom': 5.16.4
   '@testing-library/react': 13.3.0_biqbaboplfbrettd7655fr4n2y
   '@types/react': 18.0.15
@@ -1250,6 +1252,17 @@ packages:
 
   /@sinclair/typebox/0.23.5:
     resolution: {integrity: sha512-AFBVi/iT4g20DHoujvMH1aEDn8fGJh4xsRGCP6d8RpLPMqsNPvW01Jcn0QysXTsg++/xj25NmJsGyH9xug/wKg==}
+    dev: true
+
+  /@tailwindcss/typography/0.5.4_tailwindcss@3.1.6:
+    resolution: {integrity: sha512-QEdg40EmGvE7kKoDei8zr5sf4D1pIayHj4R31bH3lX8x2BtTiR+jNejYPOkhbmy3DXgkMF9jC8xqNiGFAuL9Sg==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      tailwindcss: 3.1.6
     dev: true
 
   /@testing-library/dom/8.14.1:
@@ -3602,8 +3615,16 @@ packages:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: false
 
+  /lodash.castarray/4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: true
+
   /lodash.get/4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    dev: true
+
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
     dev: true
 
   /lodash.merge/4.6.2:
