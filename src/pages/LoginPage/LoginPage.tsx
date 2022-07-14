@@ -1,9 +1,11 @@
 import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import type { User } from 'firebase/auth';
-import { Button } from '@mantine/core';
+import { Button, Loader, Title } from '@mantine/core';
+import { BrandGoogle } from 'tabler-icons-react';
 
 import { useAuth } from '@/services/firebase';
 import { userDataAPI } from '@/features/userData';
+import ErrorMessage from '@/components/ErrorMessage';
 
 let prevUser: User | null = null;
 
@@ -20,28 +22,32 @@ const LoginPage = () => {
 
   const pageWrapper = (content: JSX.Element) => (
     <>
-      <h1>Login page</h1>
-      {content}
+      <Title order={1}>Login page</Title>
+      <div className="mt-4">{content}</div>
     </>
   );
 
-  const loginButton = <Button onClick={() => signInWithGoogle()}>Login with Google</Button>;
+  const loginButton = (
+    <Button leftIcon={<BrandGoogle />} onClick={() => signInWithGoogle()} className="w-full lg:w-60">
+      Login with Google
+    </Button>
+  );
 
   if (loading) {
-    return pageWrapper(<p>Loading...</p>);
+    return pageWrapper(<Loader />);
   }
 
   if (error) {
     return pageWrapper(
       <>
         {loginButton}
-        <p>Error: {error instanceof Error ? error.message : 'Auth problem'}</p>
+        <ErrorMessage>Error: {error instanceof Error ? error.message : 'Auth problem'}</ErrorMessage>
       </>
     );
   }
 
   if (authUser) {
-    return pageWrapper(<p>You&apos;re already logged in</p>);
+    return pageWrapper(<p className="prose-invert">You&apos;re already logged in</p>);
   }
 
   return pageWrapper(loginButton);

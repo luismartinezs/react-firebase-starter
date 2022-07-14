@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import invariant from 'tiny-invariant';
+import { Button, Title, Stack, Loader } from '@mantine/core';
 
 import { useUserData } from '@/features/userData';
 import { useDeleteUser, useLogout } from '@/features/userAuth';
@@ -16,9 +17,17 @@ const AccountPage: FC = (): JSX.Element => {
 
   return (
     <>
-      <h1>Account page</h1>
-      <button onClick={logout}>Logout</button>
-      <button onClick={deleteUser}>{pendingDeleteUser ? 'Deleting account...' : 'Delete my account'}</button>
+      <Title order={1}>Account page</Title>
+      <div className="w-full lg:w-60">
+        <Stack align="flex-start" className="mt-4">
+          <Button fullWidth onClick={logout}>
+            Logout
+          </Button>
+          <Button fullWidth onClick={deleteUser} variant="outline">
+            {pendingDeleteUser ? <Loader size="sm" /> : 'Delete my account'}
+          </Button>
+        </Stack>
+      </div>
       {errorDeleteUser && <p>Failed to delete user: {errorDeleteUser.message}</p>}
     </>
   );

@@ -31,8 +31,11 @@ const Layout: React.FC = (): JSX.Element => {
         </MediaQuery>
       }
       footer={
-        <Footer height={60} p="md">
-          React Firebase Mantine Tailwind Starter @2022 by Luis Martinez Suarez
+        <Footer height={100} p="md" className="text-gray-400">
+          <Text size="sm">
+            <RecaptchaMessage />
+          </Text>
+          <Text size="sm">React Firebase Mantine Tailwind Starter @2022 by Luis Martinez Suarez</Text>
         </Footer>
       }
       header={
@@ -47,14 +50,12 @@ const Layout: React.FC = (): JSX.Element => {
                 mr="xl"
               />
             </MediaQuery>
-
             <Text>React Firebase Mantine Tailwind Starter</Text>
           </div>
         </Header>
       }
     >
       <Outlet />
-      <RecaptchaMessage />
     </AppShell>
   );
 };

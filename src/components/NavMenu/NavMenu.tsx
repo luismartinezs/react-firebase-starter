@@ -17,9 +17,9 @@ const NavMenu: FC = (): JSX.Element => {
     <List className="list-none">
       {menuItems.map(({ path, label }) => (
         <List.Item key={path} className="pt-3">
-          <NavLink to={path} className="no-underline">
-            <Text variant="link">{label}</Text>
-          </NavLink>
+          <Text variant="link" component={NavLink} to={path}>
+            {label}
+          </Text>
         </List.Item>
       ))}
     </List>
