@@ -1,5 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 
+import { Loader } from '@mantine/core';
+
 import { useUserData } from '@/features/userData';
 
 export interface IRequireAuthProps {
@@ -13,7 +15,7 @@ function RequireAuth({ children, asAdmin = false }: IRequireAuthProps): JSX.Elem
   const pathname = '/404'; // should be a path that doesn't require admin
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (isError && error instanceof Error) {

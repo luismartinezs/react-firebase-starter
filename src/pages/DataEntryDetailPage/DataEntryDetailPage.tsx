@@ -5,6 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DataEntryView from '@/features/DataEntryView';
 import { useDataEntry, useDeleteDataEntry, useEditDataEntry } from '@/features/dataEntries';
 import { serverTimestamp, type Timestamp } from 'firebase/firestore';
+import { Button, Loader, Space, Stack, Title } from '@mantine/core';
+import ErrorMessage from '@/components/ErrorMessage';
 
 const DataEntryDetailPage: FC = (): JSX.Element => {
   let { entryUid } = useParams();
@@ -19,31 +21,25 @@ const DataEntryDetailPage: FC = (): JSX.Element => {
 
   const { data: dataEntry, isLoading, isError, error } = useDataEntry(entryUid);
 
+  const pageWrapper = (content: JSX.Element) => (
+    <>
+      <Title order={1}>Data entry detail page</Title>
+      <div className="mt-4">{content}</div>
+    </>
+  );
+
   if (isLoading) {
-    return (
-      <>
-        <h1>Data entry detail page</h1>
-        <div>Loading...</div>
-      </>
-    );
+    return pageWrapper(<Loader />);
   }
 
   if (isError) {
-    return (
-      <>
-        <h1>Data entry detail page</h1>
-        <div>Error: {error instanceof Error ? error.message : 'Unable to get entry'}</div>
-      </>
+    return pageWrapper(
+      <ErrorMessage>Error: {error instanceof Error ? error.message : 'Unable to get entry'}</ErrorMessage>
     );
   }
 
   if (!dataEntry) {
-    return (
-      <>
-        <h1>Data entry detail page</h1>
-        <div>Entry not available!</div>
-      </>
-    );
+    return pageWrapper(<p className="prose-invert">Entry not available!</p>);
   }
 
   const handleDeleteDataEntry = async () => {
@@ -67,12 +63,20 @@ const DataEntryDetailPage: FC = (): JSX.Element => {
     navigate('/data-entry');
   };
 
-  return (
+  return pageWrapper(
     <>
-      <h1>Data entry detail page</h1>
       <DataEntryView dataEntry={dataEntry} />
-      <button onClick={handleDeleteDataEntry}>Delete entry</button>
-      <button onClick={handleEditDataEntry}>Update entry timestamp</button>
+      <Space h="md" />
+      <div className="w-full lg:w-60">
+        <Stack align="flex-start" className="mt-4">
+          <Button fullWidth onClick={handleDeleteDataEntry}>
+            Delete entry
+          </Button>
+          <Button fullWidth onClick={handleEditDataEntry}>
+            Update entry timestamp
+          </Button>
+        </Stack>
+      </div>
     </>
   );
 };
