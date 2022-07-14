@@ -28,24 +28,24 @@ const UserDataView: FC = (): JSX.Element => {
       <Title order={3}>User data:</Title>
       <List className="list-none break-words mt-4 flex flex-col space-y-2">
         <List.Item>
-          <Text className="text-gray-500">Name:</Text>
-          <Text>{userData.name}</Text>
+          <span className="text-gray-500">Name: </span>
+          <span>{userData.name}</span>
         </List.Item>
         <List.Item>
-          <Text className="text-gray-500">Email:</Text>
-          <Text>{userData.email}</Text>
+          <span className="text-gray-500">Email: </span>
+          <span>{userData.email}</span>
         </List.Item>
         <List.Item>
-          <Text className="text-gray-500">Uid:</Text>
-          <Text>{userData.uid}</Text>
+          <span className="text-gray-500">Uid: </span>
+          <span>{userData.uid}</span>
         </List.Item>
         <List.Item>
-          <Text className="text-gray-500">isAdmin:</Text>
-          <Text>{String(userData.isAdmin)}</Text>
+          <span className="text-gray-500">isAdmin: </span>
+          <span>{String(userData.isAdmin)}</span>
         </List.Item>
         <List.Item>
-          <Text className="text-gray-500">authProvider:</Text>
-          <Text>{userData.authProvider}</Text>
+          <span className="text-gray-500">authProvider: </span>
+          <span>{userData.authProvider}</span>
         </List.Item>
       </List>
     </>

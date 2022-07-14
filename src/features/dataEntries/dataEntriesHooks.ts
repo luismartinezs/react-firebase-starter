@@ -42,7 +42,7 @@ export function useDeleteDataEntry() {
 }
 
 export function useCreateDataEntry() {
-  return useMutation(async () => dataEntriesAPI.createDataEntry(), {
+  return useMutation(async () => await dataEntriesAPI.createDataEntry(), {
     onSuccess: () => {
       queryClient.invalidateQueries(queryKeys.dataEntriesKey);
     },
