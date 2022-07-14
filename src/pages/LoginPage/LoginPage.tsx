@@ -1,35 +1,49 @@
-import { useNavigate } from 'react-router-dom';
 import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import type { User } from 'firebase/auth';
 
 import { useAuth } from '@/services/firebase';
 import { userDataAPI } from '@/features/userData';
 
+let prevUser: User | null = null;
+
 const LoginPage = () => {
-  const navigate = useNavigate();
   const [signInWithGoogle] = useSignInWithGoogle(useAuth());
-  const [authUser] = useAuthState(useAuth(), {
+  const [authUser, loading, error] = useAuthState(useAuth(), {
     onUserChanged: async (user) => {
-      if (user) {
+      if (user && prevUser !== user) {
         await userDataAPI.initUserData(user);
+        prevUser = user;
       }
     },
   });
 
-  if (authUser) {
-    return (
+  const pageWrapper = (content: JSX.Element) => (
+    <>
+      <h1>Login page</h1>
+      {content}
+    </>
+  );
+
+  const loginButton = <button onClick={() => signInWithGoogle()}>Login with Google</button>;
+
+  if (loading) {
+    return pageWrapper(<p>Loading...</p>);
+  }
+
+  if (error) {
+    return pageWrapper(
       <>
-        <h1>Login page</h1>
-        <p>You&apos;re already logged in</p>
+        {loginButton}
+        <p>Error: {error instanceof Error ? error.message : 'Auth problem'}</p>
       </>
     );
   }
 
-  return (
-    <>
-      <h1>Login page</h1>
-      <button onClick={() => signInWithGoogle()}>Login with Google</button>
-    </>
-  );
+  if (authUser) {
+    return pageWrapper(<p>You&apos;re already logged in</p>);
+  }
+
+  return pageWrapper(loginButton);
 };
 
 export default LoginPage;

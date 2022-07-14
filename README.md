@@ -30,41 +30,25 @@ Currently implemented features / tools:
 
 Not implemented but recommended:
 
+- [ ] TailwindCSS
+- [ ] Mantine
+- [ ] Unplugin icons or heroicons
+- [ ] Cookie consent + gtag
 - [ ] Redux toolkit for global client state
+- [ ] Storybook
+- [ ] React form hooks for forms
+- [ ] yum for schema validation
+- [ ] Commitlint
 - [ ] Cypress e2e
 - [ ] Google analytics
 - [ ] Google tag manager
-- [ ] TailwindCSS
-- [ ] DaisyUI / react-daisyui
-- [ ] React form hooks for forms
-- [ ] yum for schema validation
-- [ ] Storybook
-- [ ] Commitlint
-- [ ] Cookie consent + gtag
 - [ ] Sentry
-- [ ] Unplugin icons
 
-Tasks:
+Other features:
 
-- [x] Lint and format entire project
-- [x] Setup firebase storage
-- [x] Connect this to a test project
-- [x] Setup cloud functions
-- [x] Make sure delete user is possible
-- [x] Create a minimal plop generator for different types of files
-- [x] Create a basic navigation header
-- [x] Create component that shows user data in every route, for dev
-- [x] Setup CRUD sample api for firestore that covers common use cases
-- [x] Create simple form with validation to create, edit and delete data entries
-- [x] Create view to show existing entries
-- [x] Setup user data api
-- [x] Setup firebase hosting
-- [x] Add generators for pages, features, etc
-- [x] Remove all firebase config values from repo, and use firebase secrets instead
-- [x] Recaptcha
-- [ ] Cookie consent + gtag
-- [x] Able to refresh page when in non root path
-- [ ] Make communication with firestore work with captcha in production
+- [ ] Payments: Stripe
+- [ ] Transitions: https://reactcommunity.org/react-transition-group
+- [ ] Animations: https://react-spring.dev/
 
 ## First steps to use this project
 

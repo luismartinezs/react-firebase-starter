@@ -1,6 +1,6 @@
 import { collection, query, where, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import type { Query, DocumentData, DocumentReference } from 'firebase/firestore';
-import type { User, UserCredential } from 'firebase/auth';
+import type { User } from 'firebase/auth';
 import pRetry from 'p-retry';
 
 import { useAuth, useFirestore } from '@/services/firebase';
@@ -111,8 +111,6 @@ export const initUserData = async (user: User | null) => {
 
 const userDataAPI = {
   getUserData,
-  createUserData,
-  getUserDataByUid,
   initUserData,
 };
 

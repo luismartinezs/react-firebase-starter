@@ -178,11 +178,11 @@ const deleteDataEntry = (id: string) => {
 };
 
 const entriesAPI = {
-  editDataEntry,
-  createDataEntry,
-  deleteDataEntry,
   getDataEntry,
   getDataEntries,
+  createDataEntry,
+  editDataEntry,
+  deleteDataEntry,
 };
 
 export default entriesAPI;
