@@ -1,5 +1,6 @@
 import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import type { User } from 'firebase/auth';
+import { Button } from '@mantine/core';
 
 import { useAuth } from '@/services/firebase';
 import { userDataAPI } from '@/features/userData';
@@ -24,7 +25,7 @@ const LoginPage = () => {
     </>
   );
 
-  const loginButton = <button onClick={() => signInWithGoogle()}>Login with Google</button>;
+  const loginButton = <Button onClick={() => signInWithGoogle()}>Login with Google</Button>;
 
   if (loading) {
     return pageWrapper(<p>Loading...</p>);

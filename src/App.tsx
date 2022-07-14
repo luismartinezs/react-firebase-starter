@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { MantineProvider } from '@mantine/core';
 import { BrowserRouter } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClientProvider } from 'react-query';
@@ -14,7 +15,16 @@ function App() {
       <FirebaseApp>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <Router />
+            <MantineProvider
+              theme={{
+                // Override any other properties from default theme
+                fontFamily: 'Open Sans, sans serif',
+                spacing: { xs: 15, sm: 20, md: 25, lg: 30, xl: 40 },
+                colorScheme: 'dark',
+              }}
+            >
+              <Router />
+            </MantineProvider>
             <ReactQueryDevtools initialIsOpen={false} />
           </BrowserRouter>
         </QueryClientProvider>

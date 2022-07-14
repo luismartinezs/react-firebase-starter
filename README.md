@@ -1,5 +1,13 @@
 # React firebase starter
 
+## IMPORTANT NOTE FOR MAINTAINER
+
+This branch adds styles to the starter. **NEVER** merge this branch into main or dev.
+
+To use this branch as a starter in your project, clone the project into a new repo, and then merge this branch into main
+
+---
+
 Starter template to create web apps with Firebase backend
 
 Does not assume any specific features, just common ones.
