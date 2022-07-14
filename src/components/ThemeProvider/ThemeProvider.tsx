@@ -9,7 +9,11 @@ const ThemeProvider: FC<IThemeProviderProps> = ({ children }): JSX.Element => {
     colorScheme: 'dark',
   };
 
-  return <MantineProvider theme={theme}>{children}</MantineProvider>;
+  return (
+    <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
+      {children}
+    </MantineProvider>
+  );
 };
 
 export default ThemeProvider;

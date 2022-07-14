@@ -1,5 +1,7 @@
 import { FC } from 'react';
+
 import { NavLink } from 'react-router-dom';
+import { List, Text } from '@mantine/core';
 
 const menuItems = [
   { path: '/', label: 'Home' },
@@ -12,13 +14,15 @@ const menuItems = [
 
 const NavMenu: FC = (): JSX.Element => {
   return (
-    <ul>
+    <List className="list-none">
       {menuItems.map(({ path, label }) => (
-        <li key={path}>
-          <NavLink to={path}>{label}</NavLink>
-        </li>
+        <List.Item key={path} className="pt-3">
+          <NavLink to={path} className="no-underline">
+            <Text variant="link">{label}</Text>
+          </NavLink>
+        </List.Item>
       ))}
-    </ul>
+    </List>
   );
 };
 
