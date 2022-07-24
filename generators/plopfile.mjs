@@ -26,6 +26,28 @@ export default function plopGenerator(plop) {
       },
     ],
   });
+  plop.setGenerator("Childless component", {
+    description: "Application logic for childless component",
+    prompts: [
+      {
+        type: "input",
+        name: "name",
+        message: "component name",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "../src/components/{{pascalCase name}}/index.ts",
+        templateFile: "templates/childless-component/index.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "../src/components/{{pascalCase name}}/{{pascalCase name}}.tsx",
+        templateFile: "templates/childless-component/component.tsx.hbs",
+      },
+    ],
+  });
   plop.setGenerator("page", {
     description: "Application page logic",
     prompts: [
