@@ -4,6 +4,7 @@ import { render, RenderOptions } from '@testing-library/react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { MemoryRouter, type MemoryRouterProps } from 'react-router-dom';
 import ThemeProvider from '@/components/ThemeProvider';
+import FirebaseApp from '@/providers/FirebaseApp';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,11 +33,13 @@ const AllTheProviders: FC<{
   routerProps?: MemoryRouterProps;
 }> = ({ children, routerProps = defaultRouterProps }) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter {...routerProps}>
-        <ThemeProvider>{children}</ThemeProvider>
-      </MemoryRouter>
-    </QueryClientProvider>
+    <FirebaseApp>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter {...routerProps}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </MemoryRouter>
+      </QueryClientProvider>
+    </FirebaseApp>
   );
 };
 
