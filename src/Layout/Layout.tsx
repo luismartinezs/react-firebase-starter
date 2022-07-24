@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { AppShell, Navbar, Header, Footer, Aside, Text, MediaQuery, Burger, useMantineTheme } from '@mantine/core';
 
 import NavMenu from '@/components/NavMenu';
-import UserDataView from '@/features/UserDataView';
+import UserDataView from '@/features/userData/UserDataView';
 import RecaptchaMessage from '@/components/RecaptchaMessage';
 
 const Layout: React.FC = (): JSX.Element => {

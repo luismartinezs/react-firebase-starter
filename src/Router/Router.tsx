@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import Layout from '@/components/Layout';
+import Layout from '@/Layout';
 import { RequireAuth } from '@/features/userAuth';
 import type { IRoute } from './routerTypes';
 import DynamicErrorView from '@/components/DynamicErrorView';
@@ -17,11 +17,13 @@ const DataEntryDetailPage = React.lazy(() => import('@/pages/DataEntryDetailPage
 const NewDataEntryPage = React.lazy(() => import('@/pages/NewDataEntryPage'));
 const DataEntryListPage = React.lazy(() => import('@/pages/DataEntryListPage'));
 const AdminPage = React.lazy(() => import('@/pages/AdminPage'));
+const SignUpPage = React.lazy(() => import('@/pages/SignUpPage'));
 
 export const lazyRoutes: IRoute[] = [
   // example of public route
   { path: '/', exact: true, element: HomePage },
   { path: '/login', element: LoginPage },
+  { path: '/sign-up', element: SignUpPage },
   // example of private route
   { path: '/account', element: AccountPage, requireAuth: {} },
   { path: '/data-entry', element: DataEntryListPage, requireAuth: {} },
