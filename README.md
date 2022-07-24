@@ -1,5 +1,20 @@
 # React firebase starter
 
+- [React firebase starter](#react-firebase-starter)
+  - [IMPORTANT NOTE FOR MAINTAINER](#important-note-for-maintainer)
+  - [First steps to use this project](#first-steps-to-use-this-project)
+  - [Code generators](#code-generators)
+  - [Emulate firebase services](#emulate-firebase-services)
+  - [Deploy to production](#deploy-to-production)
+  - [Import firestore indexes to local file](#import-firestore-indexes-to-local-file)
+  - [Debug cloud functions](#debug-cloud-functions)
+    - [Initial setup (only the first time)](#initial-setup-only-the-first-time)
+    - [Debugging](#debugging)
+  - [Testing](#testing)
+  - [Issues](#issues)
+  - [References](#references)
+    - [Firebase](#firebase)
+
 ## IMPORTANT NOTE FOR MAINTAINER
 
 This branch adds styles to the starter. **NEVER** merge this branch into main or dev.

@@ -9,7 +9,7 @@ import { Button, Loader, Space, Stack, Title } from '@mantine/core';
 import ErrorMessage from '@/components/ErrorMessage';
 
 const DataEntryDetailPage: FC = (): JSX.Element => {
-  let { entryUid } = useParams();
+  const { entryUid } = useParams();
   const navigate = useNavigate();
   const { mutate: deleteDataEntry } = useDeleteDataEntry();
   const { mutate: editDataEntry } = useEditDataEntry();
@@ -42,19 +42,19 @@ const DataEntryDetailPage: FC = (): JSX.Element => {
     return pageWrapper(<p className="prose-invert">Entry not available!</p>);
   }
 
-  const handleDeleteDataEntry = async () => {
+  const handleDeleteDataEntry = () => {
     if (typeof entryUid === 'undefined') {
       return;
     }
-    await deleteDataEntry(entryUid);
+    deleteDataEntry(entryUid);
     navigate('/data-entry');
   };
 
-  const handleEditDataEntry = async () => {
+  const handleEditDataEntry = () => {
     if (typeof entryUid === 'undefined') {
       return;
     }
-    await editDataEntry({
+    editDataEntry({
       id: entryUid,
       newDataEntry: {
         timestamp: serverTimestamp() as Timestamp,

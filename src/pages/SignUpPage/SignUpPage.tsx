@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import type { User } from 'firebase/auth';
 import { Title, Text, Divider, Stack } from '@mantine/core';
-import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/services/firebase';

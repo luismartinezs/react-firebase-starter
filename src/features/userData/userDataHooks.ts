@@ -7,6 +7,7 @@ import queryKeys from '@/app/queryKeys';
 
 export function useUserData() {
   const [authUser, isAuthLoading, authError] = useAuthState(useAuth(), {
+    // eslint-disable-next-line @typescript-eslint/require-await
     onUserChanged: async (user) => {
       if (!user) {
         console.log('Not logged in');

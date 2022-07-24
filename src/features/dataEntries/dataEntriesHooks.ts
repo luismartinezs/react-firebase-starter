@@ -32,9 +32,9 @@ export function useDataEntry(id: string) {
 
 export function useDeleteDataEntry() {
   return useMutation(async (id: string) => await dataEntriesAPI.deleteDataEntry(id), {
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries(queryKeys.dataEntriesKey);
-      queryClient.invalidateQueries([queryKeys.dataEntryKey, id], {
+    onSuccess: async (_, id) => {
+      await queryClient.invalidateQueries(queryKeys.dataEntriesKey);
+      await queryClient.invalidateQueries([queryKeys.dataEntryKey, id], {
         refetchActive: false,
       });
     },
@@ -43,8 +43,8 @@ export function useDeleteDataEntry() {
 
 export function useCreateDataEntry() {
   return useMutation(async () => await dataEntriesAPI.createDataEntry(), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(queryKeys.dataEntriesKey);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(queryKeys.dataEntriesKey);
     },
   });
 }
@@ -54,9 +54,9 @@ export function useEditDataEntry() {
     async ({ id, newDataEntry }: { id: string; newDataEntry: IDataEntry }) =>
       dataEntriesAPI.editDataEntry(id, newDataEntry),
     {
-      onSuccess: (_, { id }) => {
-        queryClient.invalidateQueries(queryKeys.dataEntriesKey);
-        queryClient.invalidateQueries([queryKeys.dataEntryKey, id]);
+      onSuccess: async (_, { id }) => {
+        await queryClient.invalidateQueries(queryKeys.dataEntriesKey);
+        await queryClient.invalidateQueries([queryKeys.dataEntryKey, id]);
       },
     }
   );

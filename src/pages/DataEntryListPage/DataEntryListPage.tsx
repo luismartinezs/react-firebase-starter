@@ -34,13 +34,19 @@ const DataEntryListPage: FC = (): JSX.Element => {
 
   return pageWrapper(
     <List className="list-none break-words mt-4 flex flex-col space-y-4">
-      {dataEntries.map((dataEntry) => (
-        <List.Item key={dataEntry.id}>
-          <Text component={Link} variant="link" to={`/data-entry/${dataEntry.id}`}>
-            <DataEntryView dataEntry={dataEntry} />
-          </Text>
-        </List.Item>
-      ))}
+      {dataEntries.map((dataEntry) => {
+        if (!dataEntry.id) {
+          return null;
+        }
+
+        return (
+          <List.Item key={dataEntry.id}>
+            <Text component={Link} variant="link" to={`/data-entry/${dataEntry.id}`}>
+              <DataEntryView dataEntry={dataEntry} />
+            </Text>
+          </List.Item>
+        );
+      })}
     </List>
   );
 };

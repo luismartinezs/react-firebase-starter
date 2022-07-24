@@ -20,9 +20,11 @@ const AccountPage: FC = (): JSX.Element => {
       <Title order={1}>Account page</Title>
       <div className="w-full lg:w-60">
         <Stack align="flex-start" className="mt-4">
+          {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <Button fullWidth onClick={logout}>
             Logout
           </Button>
+          {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <Button fullWidth onClick={deleteUser} variant="outline">
             {pendingDeleteUser ? <Loader size="sm" /> : 'Delete my account'}
           </Button>

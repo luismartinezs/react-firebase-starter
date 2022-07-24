@@ -1,4 +1,4 @@
-import AdminPage from './AdminPage'
+import AdminPage from './AdminPage';
 
-export { AdminPage }
-export default AdminPage
+export { AdminPage };
+export default AdminPage;

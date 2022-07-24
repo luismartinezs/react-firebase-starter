@@ -9,13 +9,14 @@ const NewDataEntryPage: FC = (): JSX.Element => {
   const navigate = useNavigate();
   const { mutate: createDataEntry } = useCreateDataEntry();
 
-  const handleCreateDataEntry = async () => {
-    await createDataEntry();
+  const handleCreateDataEntry = () => {
+    createDataEntry();
     navigate('/data-entry');
   };
   return (
     <>
       <Title order={1}>New data entry page</Title>
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <Button onClick={handleCreateDataEntry} className="mt-4">
         Create new data entry
       </Button>

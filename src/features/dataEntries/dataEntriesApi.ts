@@ -54,7 +54,7 @@ interface IGetDataEntries {
 const getQuery = ({ isAdmin = false }: IGetDataEntriesOptions): Query<IDataEntry> => {
   type QueryTuple = [CollectionReference<DocumentData>, ...QueryConstraint[]];
 
-  let queryElements: QueryTuple = [collection(useFirestore(), DATA_ENTRIES).withConverter(dataEntryConverter)];
+  const queryElements: QueryTuple = [collection(useFirestore(), DATA_ENTRIES).withConverter(dataEntryConverter)];
 
   if (!isAdmin) {
     queryElements.push(where('userUid', '==', useAuth().currentUser?.uid));
@@ -92,7 +92,7 @@ const getDataEntryRefById: IGetEntryRefById<IDataEntry> = (id) => {
   if (!id) {
     return null;
   }
-  return doc(useFirestore(), DATA_ENTRIES, id).withConverter(dataEntryConverter) as DocumentReference<IDataEntry>;
+  return doc(useFirestore(), DATA_ENTRIES, id).withConverter(dataEntryConverter);
 };
 
 const getDataEntry = async (id: string): Promise<IDataEntry | null> => {

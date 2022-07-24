@@ -15,6 +15,7 @@ const GoogleSignIn: FC<IGoogleSignInProps> = ({ label = 'Login with Google' }): 
     <>
       <Button
         leftIcon={<BrandGoogle />}
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={() => signInWithGoogle()}
         className="w-full lg:w-60"
         loading={loading}

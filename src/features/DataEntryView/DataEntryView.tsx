@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Card, Stack, Text } from '@mantine/core';
+import { Card, Stack } from '@mantine/core';
 
 import { IDataEntryViewProps } from './DataEntryView.props';
 

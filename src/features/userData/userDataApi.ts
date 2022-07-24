@@ -35,7 +35,7 @@ export const getUserData = async (uid: string): Promise<IUserData | null> => {
   const docSnap = await pRetry(async () => getDoc(docRef), { retries: 3 });
 
   if (docSnap.exists()) {
-    return docSnap.data() as IUserData;
+    return docSnap.data();
   }
 
   return null;
@@ -106,7 +106,7 @@ export const initUserData = async (user: User | null) => {
     return;
   }
 
-  createUserData(user);
+  await createUserData(user);
 };
 
 const userDataAPI = {

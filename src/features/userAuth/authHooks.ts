@@ -10,7 +10,7 @@ export const useDeleteUser = () => {
 
   const deleteUser = async () => {
     await _deleteUser();
-    logout();
+    await logout();
   };
 
   return {

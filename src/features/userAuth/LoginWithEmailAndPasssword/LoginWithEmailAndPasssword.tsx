@@ -40,6 +40,7 @@ const LoginWithEmailAndPasssword: FC = (): JSX.Element => {
       isSuccess={!!_user}
       successMessage="You are logged in"
     >
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <form className="flex flex-col space-y-4" onSubmit={form.onSubmit(handleSubmit)}>
         <TextInput
           label="Email"

@@ -17,7 +17,9 @@ const queryClient = new QueryClient({
 setLogger({
   log: console.log,
   warn: console.warn,
-  error: () => {},
+  error: () => {
+    // do nothing
+  },
 });
 
 export const defaultRouterProps: MemoryRouterProps = {

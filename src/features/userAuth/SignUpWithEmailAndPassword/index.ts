@@ -1,4 +1,4 @@
-import SignUpWithEmailAndPassword from './SignUpWithEmailAndPassword'
+import SignUpWithEmailAndPassword from './SignUpWithEmailAndPassword';
 
-export { SignUpWithEmailAndPassword }
-export default SignUpWithEmailAndPassword
+export { SignUpWithEmailAndPassword };
+export default SignUpWithEmailAndPassword;

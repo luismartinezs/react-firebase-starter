@@ -1,4 +1,4 @@
-import GoogleSignIn from './GoogleSignIn'
+import GoogleSignIn from './GoogleSignIn';
 
-export { GoogleSignIn }
-export default GoogleSignIn
+export { GoogleSignIn };
+export default GoogleSignIn;

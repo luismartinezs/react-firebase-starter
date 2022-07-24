@@ -13,5 +13,6 @@
   "[handlebars]": {
     "editor.formatOnSave": false,
     "editor.suggest.insertMode": "replace"
-  }
+  },
+  "markdown.extension.toc.slugifyMode": "gitlab"
 }

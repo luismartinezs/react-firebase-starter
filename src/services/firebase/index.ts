@@ -14,7 +14,7 @@ let firestore: ReturnType<typeof getFirestore>;
 let storage: ReturnType<typeof getStorage>;
 let functions: ReturnType<typeof getFunctions>;
 
-const useEmulator = () => import.meta.env.VITE_FIREBASE_EMULATOR;
+const useEmulator = () => import.meta.env.VITE_FIREBASE_EMULATOR as string;
 
 // init firebase app
 const initFirebaseApp = () => {
@@ -28,7 +28,7 @@ const initFirebaseApp = () => {
     if (import.meta.env.PROD) {
       initializeAppCheck(app, {
         // replace the public key below with your own public key
-        provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_V3_PUBLIC_KEY),
+        provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_V3_PUBLIC_KEY as string),
         isTokenAutoRefreshEnabled: true,
       });
     }
