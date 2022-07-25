@@ -39,7 +39,7 @@ Currently implemented features / tools:
 - [x] Firebase emulation
 - [x] Firebase hosting
 - [x] Vitest for unit testing
-- [x] React router
+- [x] React router with lazy routes
 - [x] Public and private pages
 - [x] Login page
 - [x] Account page with logout and delete account
@@ -50,28 +50,33 @@ Currently implemented features / tools:
 - [x] React-query for server state
 - [x] Github actions
 - [x] Recaptcha
+- [x] Handle dates with date-fns
 
 Not implemented but recommended:
 
-- [ ] TailwindCSS
-- [ ] Mantine
-- [ ] Unplugin icons or heroicons
+- [x] TailwindCSS
+- [x] Mantine
+- [x] tabler icons
 - [ ] Cookie consent + gtag
 - [ ] Redux toolkit for global client state
 - [ ] Storybook
-- [ ] React form hooks for forms
+- [ ] Mantine forms
 - [ ] yum for schema validation
-- [ ] Commitlint
+- [x] Commitlint
+- [x] Pre commit hooks
 - [ ] Cypress e2e
 - [ ] Google analytics
 - [ ] Google tag manager
 - [ ] Sentry
+- [ ] i18n: https://github.com/i18next/react-i18next
 
 Other features:
 
-- [ ] Payments: Stripe
+- [ ] Payments: Stripe / Paypal
 - [ ] Transitions: https://reactcommunity.org/react-transition-group
 - [ ] Animations: https://react-spring.dev/
+- [ ] Rich text: [draft-js](https://draftjs.org/)
+
 
 ## First steps to use this project
 
@@ -94,6 +99,7 @@ Other features:
 - Run this command in the console: `(cd functions && echo NODE_ENV=production > .env && echo NODE_ENV=development > .env.local)`
 - Add an `.env` file and an `.env.local` to `functions/` with a `NODE_ENV` variable set to `product
 - Run locally the app and emulate firebase services
+  - Initialize functions project with `(cd functions && pnpm i && pnpm setupEnvVars)`
   - Build functions by running `(cd functions && pnpm build)`
   - Run these two commands in separate shells: `pnpm emu:dev`, `pnpm emu:start`
 - Try to login with google. If you go to your firestore emulator you should see a user entry
